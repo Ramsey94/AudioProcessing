@@ -31,7 +31,7 @@ mylabel4 = Label(root, text='', width=50, anchor="e", background='white').grid(r
        columnspan = 2)
 mylabel5 = Label(root, text='', width=50, anchor="e", background='white').grid(row=1, column=1,
        columnspan = 2)
-mylabel6 = Label(root, text='', width=50, anchor="e", background='white').grid(row=2, column=1,
+mylabel6 = Label(root, text='Please select input and output folder', width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
 
 
@@ -43,10 +43,10 @@ def myClick():
     
 
 # Define myButtons
-myButton1 = Button(root, text="EXIT", pady=3, padx=60, command=myClick, fg="white", bg="blue") #padx: anchura
+myButton1 = Button(root, text="EXIT", pady=3, padx=60, command=root.destroy, fg="white", bg="blue") #padx: anchura
 myButton2 = Button(root, text="ANALYSE", pady=3,state=DISABLED, padx=60, command=myClick) #padx: anchura
-myButton3 = Button(root, text="EXPORT",  pady=3,state=DISABLED, padx=60, command=myClick) #padx: anchura
-myButton4 = Button(root, text="DISPLAY SUMMARY", pady=3,state=DISABLED, padx=10, command=myClick) #padx: anchura
+myButton3 = Button(root, text="DISPLAY SUMMARY",  pady=3,state=DISABLED, padx=30, command=myClick) #padx: anchura
+myButton4 = Button(root, text="EXPORT", pady=3,state=DISABLED, padx=40, command=myClick) #padx: anchura
 
 myButton5 = Button(root, text="BROWSE", pady=3,state=DISABLED, padx=40, command=myClick) #padx: anchura
 myButton6 = Button(root, text="BROWSE",  pady=3,state=DISABLED, padx=40, command=myClick) #padx: anchura
