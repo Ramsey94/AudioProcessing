@@ -112,6 +112,11 @@ def Analyze():
        columnspan = 2)
     myButton4 = Button(root, text="EXPORT", pady=3,state=NORMAL, padx=40, command=myClick1)
     myButton4.grid(row=3, column=3, padx=1, pady=1)
+    print("Test line")
+
+
+
+    
 
     
 
