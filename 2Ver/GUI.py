@@ -1,20 +1,13 @@
 
-############ IMPORT LIBRARIES FOR MAIN SCRIPT ######################
-
-
+################################################# IMPORT LIBRARIES FOR MAIN SCRIPT #########################################################
 import sys
 import pydub
 
-########################3
-
 # TKINTER DEPENDENCIES #
 import numpy as np
-
-
 import tkinter as tk
 from tkinter import Button
 from tkinter import filedialog
-from tkinter import ttk
 
 # import the os module #
 import os
@@ -33,28 +26,23 @@ import librosa
 from librosa import load
 from librosa.effects import trim
 
-
 # Para escribir wav
 from scipy.io.wavfile import write, read
 
 # Pandas for excel files working
-
 import pandas as pd
 
-############ IMPORT LIBRARIES FOR GUI ######################
-
+# IMPORT LIBRARIES FOR GUI
 from tkinter import *  # CHECK THIS LINE TO NOT IMPORT EVERYTHING FURTHER IN THE WAY
-from tkinter import filedialog
 
-
-############ INITIALIZE MAIN WINDOW ######################
+################################################### INITIALIZE MAIN WINDOW #####################################################
 
 root = Tk()
 root.title("AnalyzeIt!")
 root.iconbitmap('icon.ico') 
 root.geometry("646x121")
 
-############ CREATING WIDGETS ######################
+################################################### CREATING WIDGETS ############################################################
 
 # Creating a label widget
 myLabel1 = Label(root, text='Input File')
@@ -83,28 +71,11 @@ mylabel6 = Label(root, text='Please select input and output folder', width=50, a
        columnspan = 2)
 
 
-# Create fcn to Export
 
-def Export():
-           #  Excel file creation
-        out_path = outputFolder+'/'+folder+'/'+'Summary.xlsx'
-        writer = pd.ExcelWriter(out_path)
-
-    # write dataframe to excel
-
-        df.to_excel(writer, sheet_name='Sheet1')
-
-
-    # save the excel
-        writer.save()
-        print("DataFrame is exported successfully to 'Summary.xlsx' Excel File.")
-        mylabel6 = Label(root, text="Files successfully exported to directory ", width=50, anchor="center", background='white').grid(row=2, column=1,
-        columnspan = 2)
-
-
+################################################### CREATE BUTTON'S FUNCTIONS ###################################################
 
 # Create fcn to Browse input
-def myClick1():
+def BrowseIn():
     mylabel6 = Label(root, text='Folder is being loaded', width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
     root.filename = filedialog.askdirectory(title="Select Input Folder")
@@ -119,7 +90,7 @@ def myClick1():
     return inputFolder
 
 # Create fcn to Browse output
-def myClick2():
+def BrowseOut():
     mylabel6 = Label(root, text='Folder is being loaded', width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
     root.filename = filedialog.askdirectory(title="Select Output Folder")
@@ -132,33 +103,15 @@ def myClick2():
     
     return outputFolder
 
-# Create Fcn to open new window
-
-def open_df():
-    new_window = tk.Toplevel(root)
-    new_frame = tk.Frame(new_window)
-    new_frame.pack()
-    tree = ttk.Treeview(new_frame, columns=df.columns, show="headings")
-
-    
-    for col in df.columns:
-        tree.heading(col, text=col)
-        tree.column(col, width=100)
-    for index, row in df.iterrows():
-        tree.insert("", index, values=row)
-    tree.pack()
-
-
 # Create fcn to Browse output
 def Analyze():
-    myButton4 = Button(root, text="EXPORT", pady=3,state=NORMAL, padx=40, command=Export)
-    myButton4.grid(row=3, column=3, padx=1, pady=1)
-    print("Test line")
+    myButton4 = Button(root, text="EXPORT", pady=3,state=NORMAL, padx=60, command=Export)
+    myButton4.grid(row=3, column=2, padx=1, pady=1)
     # Create directory for the output files
     from datetime import datetime
     now = datetime.now()
     # dd-mm-aaaa-hms
-    dt_string = now.strftime("%d-%m-%Y-%H%M%S")
+    dt_string = now.strftime(r"%d-%m-%Y-%H%M%S")
     # detect the output directory
     path = outputFolder
     PathFolder=path+"/"
@@ -176,8 +129,6 @@ def Analyze():
     mylabel6 = Label(root, text="Successfully created the directory %s " % folder, width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
 
-    myButton3 = Button(root, text="DISPLAY SUMMARY",  pady=3,state=NORMAL, padx=30, command=open_df)
-    myButton3.grid(row=3, column=2, padx=1, pady=1)
     mylabel6 = Label(root, text='Folder Analyzed Succesfully!', width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
 
@@ -254,30 +205,29 @@ def Analyze():
             
             df = df.append(new_row, ignore_index=True)
 
+# Create fcn to Export
+def Export():
+           #  Excel file creation
+        out_path = outputFolder+'/'+folder+'/'+'Summary.xlsx'
+        writer = pd.ExcelWriter(out_path)
+
+    # write dataframe to excel
+
+        df.to_excel(writer, sheet_name='Sheet1')
 
 
-    
+    # save the excel
+        writer.save()
+        print("DataFrame is exported successfully to 'Summary.xlsx' Excel File.")
+        mylabel6 = Label(root, text="Files successfully exported to directory ", width=50, anchor="center", background='white').grid(row=2, column=1,
+        columnspan = 2)
 
 # Define myButtons
-myButton1 = Button(root, text="EXIT", pady=3, padx=60, command=root.destroy, fg="white", bg="blue") #padx: anchura
-myButton2 = Button(root, text="ANALYSE", pady=3,state=DISABLED, padx=60, command=Analyze) #padx: anchura
-myButton3 = Button(root, text="DISPLAY SUMMARY",  pady=3,state=DISABLED, padx=30, command=myClick1) #padx: anchura
-myButton4 = Button(root, text="EXPORT", pady=3,state=DISABLED, padx=40, command=Export) #padx: anchura
-
-myButton5 = Button(root, text="BROWSE", pady=3, padx=40, command=myClick1) #padx: anchura
-myButton6 = Button(root, text="BROWSE",  pady=3, padx=40, command=myClick2) #padx: anchura
-
-
-myButton1.grid(row=3, column=0, padx=1, pady=1)
-myButton2.grid(row=3, column=1, padx=1, pady=1)
-myButton3.grid(row=3, column=2, padx=1, pady=1)
-myButton4.grid(row=3, column=3, padx=1, pady=1)
-
-myButton5.grid(row=0, column=3, padx=1, pady=1)
-myButton6.grid(row=1, column=3, padx=1, pady=1)
-
-
-
+myButton1 = Button(root, text="EXIT", pady=3, padx=60, command=root.destroy, fg="white", bg="blue").grid(row=3, column=0, padx=1, pady=1) #padx: anchura
+myButton2 = Button(root, text="ANALYSE", pady=3,state=DISABLED, padx=60, command=Analyze).grid(row=3, column=1, padx=1, pady=1) #padx: anchura
+myButton4 = Button(root, text="EXPORT", pady=3,state=DISABLED, padx=60, command=Export).grid(row=3, column=2, padx=1, pady=1) #padx: anchura
+myButton5 = Button(root, text="BROWSE", pady=3, padx=40, command=BrowseIn).grid(row=0, column=3, padx=1, pady=1) #padx: anchura
+myButton6 = Button(root, text="BROWSE",  pady=3, padx=40, command=BrowseOut).grid(row=1, column=3, padx=1, pady=1) #padx: anchura
 
 
 root.mainloop()
