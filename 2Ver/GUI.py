@@ -14,6 +14,7 @@ import numpy as np
 import tkinter as tk
 from tkinter import Button
 from tkinter import filedialog
+from tkinter import ttk
 
 # import the os module #
 import os
@@ -131,6 +132,23 @@ def myClick2():
     
     return outputFolder
 
+# Create Fcn to open new window
+
+def open_df():
+    new_window = tk.Toplevel(root)
+    new_frame = tk.Frame(new_window)
+    new_frame.pack()
+    tree = ttk.Treeview(new_frame, columns=df.columns, show="headings")
+
+    
+    for col in df.columns:
+        tree.heading(col, text=col)
+        tree.column(col, width=100)
+    for index, row in df.iterrows():
+        tree.insert("", index, values=row)
+    tree.pack()
+
+
 # Create fcn to Browse output
 def Analyze():
     myButton4 = Button(root, text="EXPORT", pady=3,state=NORMAL, padx=40, command=Export)
@@ -158,7 +176,7 @@ def Analyze():
     mylabel6 = Label(root, text="Successfully created the directory %s " % folder, width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
 
-    myButton3 = Button(root, text="DISPLAY SUMMARY",  pady=3,state=NORMAL, padx=30, command=myClick1)
+    myButton3 = Button(root, text="DISPLAY SUMMARY",  pady=3,state=NORMAL, padx=30, command=open_df)
     myButton3.grid(row=3, column=2, padx=1, pady=1)
     mylabel6 = Label(root, text='Folder Analyzed Succesfully!', width=50, anchor="center", background='white').grid(row=2, column=1,
        columnspan = 2)
