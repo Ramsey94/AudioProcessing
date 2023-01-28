@@ -205,6 +205,30 @@ def Analyze():
             
             df = df.append(new_row, ignore_index=True)
 
+    ## Function to convert back to mp3 the files
+    input_file = glob(PathFolder+folder+'/'+'*.wav')
+    for i in input_file:
+        print(i)
+        my_string=i
+        my_string2=my_string.split("\\",1)[1]
+        my_string3=my_string2.split(".",1)[0]
+        # assign files
+        input_file = i
+        output_file = my_string3+'.mp3'
+        # convert WAV file to mp3 file 
+
+        sound = AudioSegment.from_wav(i)
+        sound.export(PathFolder+folder+'/'+output_file, format="mp3")
+    print ("Audios convertidos a MP3 con exito!")
+    # Borrar los anteriores en formato WAV
+    input_file = glob(PathFolder+folder+'/'+'*.wav')
+    for i in input_file:
+        my_string=i
+        my_string2=my_string.split("\\",1)[1]
+        my_string3=my_string2.split(".",1)[0]
+        os.remove(PathFolder+folder+'/'+my_string3+'.wav')
+        
+
 # Create fcn to Export
 def Export():
            #  Excel file creation
