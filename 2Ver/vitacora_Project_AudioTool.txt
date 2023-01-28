@@ -1,0 +1,79 @@
+Vitacora del proyecto
+
+Tendre que estudiar que librerias necesito para mi proyecto
+y cuales son las versiones compatibles entre ellas.
+
+Definir un entorno virtual eligiendo la version de python que mejor funcione 
+con las librerias.
+
+Crear un virtual environment y decirle la version del interprete que queremos
+
+Para crear un virtual env:
+
+nos paramos en la carpeta del proyecto nuevo que vamos a crear y agregamos el comando para
+crear el environment as:
+
+C:\Users\VICTUS\AudioToolV2>C:\Users\VICTUS\pyver\py3105\python -m venv my_env
+
+
+luego de crear el environmnet, hay que activalo accediendo con el comando cd a la carpeta Scripts y agregar el comando activate asi:
+
+...\Scripts\activate
+
+DONE!
+
+
+
+## el codigo de abajo sirve para que pyinstaller sepa donde esta todo lo de librosa
+pyinstaller -F --hidden-import="sklearn.sklearn.metrics._pairwise_distances_reduction._datasets_pair" --onefile main.py --additional-hooks-dir "C:\Users\VICTUS\AudioTool\extra-hooks" --paths=
+
+from sklearn.metrics import classification_report
+
+
+pyinstaller main.spec --specpath=test
+
+
+Solucion error imprtar librosa
+https://www.mail-archive.com/pyinstaller@googlegroups.com/msg08012.html
+
+
+
+C:\Users\VICTUS\AppData\Local\Temp\_MEI233522\librosa\util\example_data\registry.txt'
+
+
+
+Nuevo aprendizaje...
+
+Para clonar un ambiente, se debe crear un archivo texto de requerimentos desde el entorno original:
+
+
+pip freeze > requirements.txt
+
+en el ambiente que queremos clonar, tomar el archivo de texto y copiarlo en la carpeta nueca que tendra nuestro nuevo ambiente
+una vez esto, se crea un nuevo ambiente en esta carpeta, se activa y finalmente se instalan los requerimientos generado anteriormente.
+
+pip install -r requirements.txt
+
+
+
+
+6 febrero a las 9pm  malta hasta el 13 a las 4 pm
+averiguar lanchjitas para quentin individuales
+spots 
+22 julio concierto.
+
+San sebastian espa;a es lindo 
+y desde alli subir o barcelona tambien
+tolosa
+
+7 work termina de quentin
+y quentin nos podr[ia caer en tolosa y caer juntos a Francia 
+
+visa trabaja y vacaciones visa francia y pedir cita
+
+hay citas pero necesito ahcer los tramtites
+
+
+
+
+
